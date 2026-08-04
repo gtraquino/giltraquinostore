@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GiltraquinoStore – A sua loja online em Angola</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F56A00;
+    --orange-light: #FF8C2A;
+    --orange-dark: #C44E00;
+    --orange-pale: #FFF0E6;
+    --orange-glow: rgba(245,106,0,0.18);
+    --grey: #F2F3F5;
+    --grey-mid: #E0E2E7;
+    --grey-dark: #6B7280;
+    --grey-deep: #374151;
+    --white: #FFFFFF;
+    --black: #111418;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 48px rgba(245,106,0,0.16);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--grey-mid);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--black);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: var(--orange); }
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--grey-deep);
+    font-size: .9rem;
+    font-weight: 500;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 2px; background: var(--orange);
+    transform: scaleX(0); transition: transform .2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+  .btn-ghost {
+    padding: 9px 20px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--grey-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+  .btn-primary {
+    padding: 9px 22px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245,106,0,0.35); }
+
+  .btn-xl {
+    padding: 16px 36px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(145deg, var(--grey) 0%, #EEF0F3 50%, #FDECD8 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hero-bg-circle.c1 { width: 600px; height: 600px; background: rgba(245,106,0,.12); top: -150px; right: -100px; }
+  .hero-bg-circle.c2 { width: 400px; height: 400px; background: rgba(245,106,0,.08); bottom: -100px; left: 10%; }
+
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white);
+    border: 1px solid var(--orange-pale);
+    padding: 7px 16px;
+    border-radius: 40px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--orange-dark);
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(245,106,0,0.10);
+  }
+  .hero-badge::before { content: '🇦🇴'; }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.13;
+    color: var(--black);
+    margin-bottom: 22px;
+  }
+  .hero h1 .highlight {
+    color: var(--orange);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--orange-light), var(--orange-pale));
+    border-radius: 3px;
+    z-index: -1;
+    opacity: .5;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--grey-dark);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--grey-mid);
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--black);
+  }
+  .stat-label { font-size: .8rem; color: var(--grey-dark); font-weight: 500; }
+
+  /* Hero card visual */
+  .hero-visual {
+    position: relative;
+    display: flex; flex-direction: column; gap: 16px;
+    animation: floatUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .store-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--grey-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .store-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  }
+
+  .store-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+  }
+  .store-icon {
+    width: 44px; height: 44px;
+    background: var(--orange-pale);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .store-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+  .store-tag { font-size: .75rem; color: var(--orange); background: var(--orange-pale); padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 3px; }
+
+  .store-metric-row { display: flex; gap: 12px; }
+  .metric-box {
+    flex: 1;
+    background: var(--grey);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .metric-val { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--black); }
+  .metric-lab { font-size: .72rem; color: var(--grey-dark); margin-top: 3px; }
+
+  .mini-order-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey);
+  }
+  .mini-order-row:last-child { border-bottom: none; }
+  .order-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .order-dot.green { background: #22C55E; }
+  .order-info { flex: 1; }
+  .order-name { font-size: .82rem; font-weight: 600; }
+  .order-time { font-size: .72rem; color: var(--grey-dark); }
+  .order-price { font-size: .85rem; font-weight: 700; color: var(--orange-dark); font-family: 'Syne', sans-serif; }
+
+  .floating-badge {
+    position: absolute;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    animation: floatBadge 3s ease-in-out infinite;
+  }
+  .floating-badge.top { top: -16px; right: -16px; }
+  .floating-badge.bot { bottom: 50px; left: -24px; animation-delay: 1.5s; }
+
+  /* ── BUSINESS TYPES ── */
+  .section {
+    padding: 96px 5%;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.18;
+    margin-bottom: 16px;
+    color: var(--black);
+  }
+
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--grey-dark);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 52px;
+  }
+
+  .biz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .biz-card {
+    background: var(--grey);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    cursor: pointer;
+    transition: all .25s;
+    border: 2px solid transparent;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .biz-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--orange-pale), transparent);
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .biz-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .biz-card:hover::before { opacity: 1; }
+
+  .biz-emoji { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+  .biz-name { font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 700; color: var(--black); }
+  .biz-desc { font-size: .78rem; color: var(--grey-dark); margin-top: 6px; line-height: 1.5; }
+
+  /* ── FEATURES ── */
+  .features-bg {
+    background: var(--grey);
+    padding: 96px 5%;
+  }
+  .features-inner { max-width: 1200px; margin: 0 auto; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .feat-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    border: 1px solid var(--grey-mid);
+    transition: all .25s;
+  }
+  .feat-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+
+  .feat-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  .feat-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .feat-desc { font-size: .88rem; color: var(--grey-dark); line-height: 1.65; }
+
+  /* ── PLANS ── */
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .plan-card {
+    background: var(--white);
+    border: 2px solid var(--grey-mid);
+    border-radius: 18px;
+    padding: 36px 28px;
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-card:hover { box-shadow: var(--shadow-lg); }
+  .plan-card.featured {
+    border-color: var(--orange);
+    background: linear-gradient(180deg, #FFF5EE 0%, var(--white) 50%);
+    transform: scale(1.03);
+  }
+  .plan-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--orange);
+    color: white;
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .plan-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--grey-dark); margin-bottom: 8px; }
+  .plan-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .plan-price sup { font-size: 1rem; vertical-align: super; color: var(--grey-dark); }
+  .plan-price span { font-size: 1rem; color: var(--grey-dark); font-weight: 500; }
+  .plan-desc { font-size: .85rem; color: var(--grey-dark); margin-bottom: 28px; line-height: 1.6; }
+  .plan-divider { border: none; border-top: 1px solid var(--grey-mid); margin: 20px 0; }
+  .plan-feature { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: .87rem; }
+  .plan-check { color: var(--orange); flex-shrink: 0; font-weight: 700; }
+  .plan-cta {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: all .2s;
+  }
+  .plan-cta.outline { background: transparent; border: 2px solid var(--grey-mid); color: var(--grey-deep); }
+  .plan-cta.outline:hover { border-color: var(--orange); color: var(--orange); }
+  .plan-cta.solid { background: var(--orange); border: none; color: white; }
+  .plan-cta.solid:hover { background: var(--orange-dark); }
+
+  /* ── HOW IT WORKS ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 8%; right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-pale));
+    z-index: 0;
+  }
+  .step-item { text-align: center; position: relative; z-index: 1; }
+  .step-number {
+    width: 56px; height: 56px;
+    background: var(--orange);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 20px rgba(245,106,0,0.35);
+    border: 4px solid var(--white);
+  }
+  .step-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: .83rem; color: var(--grey-dark); line-height: 1.6; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 50%, var(--orange-light) 100%);
+    padding: 80px 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,0.15)'/%3E%3C/svg%3E") repeat;
+  }
+  .cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .cta-banner h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; color: white; margin-bottom: 16px; }
+  .cta-banner p { font-size: 1.05rem; color: rgba(255,255,255,0.85); margin-bottom: 36px; line-height: 1.7; }
+  .btn-white {
+    padding: 15px 36px;
+    background: white;
+    color: var(--orange-dark);
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.7);
+    padding: 60px 5% 32px;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+  .footer-brand h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+    color: white; margin-bottom: 12px;
+  }
+  .footer-brand h3 span { color: var(--orange); }
+  .footer-brand p { font-size: .85rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem; color: white; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.6); font-size: .85rem; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--orange); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; font-size: .8rem; }
+  .footer-bottom a { color: var(--orange); text-decoration: none; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 520px; width: 100%;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    transition: transform .3s;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .modal-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; }
+  .modal-close {
+    width: 36px; height: 36px;
+    background: var(--grey); border: none; border-radius: 50%;
+    cursor: pointer; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+  }
+  .modal-close:hover { background: var(--grey-mid); }
+
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 7px; color: var(--grey-deep); }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--grey-mid);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem;
+    color: var(--black);
+    background: var(--white);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .form-input:focus, .form-select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px var(--orange-glow); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: .7; }
+  }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in { animation: fadeIn .6s ease forwards; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 9px 20px;
+    border-radius: 30px;
+    border: 1.5px solid var(--grey-mid);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    color: var(--grey-deep);
+  }
+  .tab-btn.active { background: var(--orange); border-color: var(--orange); color: white; }
+  .tab-btn:hover:not(.active) { border-color: var(--orange); color: var(--orange); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; animation: fadeIn .4s ease; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .features-grid, .plans-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .plan-card.featured { transform: none; }
+  }
+  @media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-dot"></div>
+    Giltraquino<span>Store</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#plataforma">Plataforma</a></li>
+    <li><a href="#negocios">Tipos de Negócio</a></li>
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#planos">Planos</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-ghost" onclick="openModal('login')">Entrar</a>
+    <a href="#" class="btn-primary" onclick="openModal('register')">✦ Criar Loja Grátis</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="plataforma">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">A plataforma nº1 de e-commerce de Angola</div>
+      <h1>
+        Crie a sua loja<br>
+        online em<br>
+        <span class="highlight">minutos</span>
+      </h1>
+      <p>
+        A GiltraquinoStore é a plataforma completa para vender online em Angola. Restaurantes, lojas de roupa, supermercados, serviços — crie qualquer tipo de negócio com preços em <strong>Kz</strong> e receba pagamentos locais.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary btn-xl" onclick="openModal('register')">✦ Começar Agora — É Grátis</button>
+        <button class="btn-ghost btn-xl" onclick="scrollTo('negocios')">Ver Tipos de Negócio</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">12.000+</div>
+          <div class="stat-label">Lojas Activas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98 Kz</div>
+          <div class="stat-label">Taxa fixa por venda</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Suporte em Português</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="floating-badge top">🔔 Nova encomenda! +12.500 Kz</div>
+      <div class="store-card">
+        <div class="store-card-header">
+          <div class="store-icon">🛍️</div>
+          <div>
+            <div class="store-name">Loja da Mara</div>
+            <span class="store-tag">Moda &amp; Vestuário</span>
+          </div>
+        </div>
+        <div class="store-metric-row">
+          <div class="metric-box">
+            <div class="metric-val">345.200 Kz</div>
+            <div class="metric-lab">Vendas do mês</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">89</div>
+            <div class="metric-lab">Encomendas</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">4.8 ★</div>
+            <div class="metric-lab">Avaliação</div>
+          </div>
+        </div>
+      </div>
+      <div class="store-card">
+        <div style="font-family:'Syne',sans-serif; font-size:.85rem; font-weight:700; margin-bottom:14px; color:var(--grey-dark);">ÚLTIMAS ENCOMENDAS</div>
+        <div class="mini-order-row">
+          <div class="order-dot"></div>
+          <div class="order-info">
+            <div class="order-name">João Henriques</div>
+            <div class="order-time">Há 2 minutos · Luanda</div>
+          </div>
+          <div class="order-price">8.500 Kz</div>
+        </div>
+        <div class="mini-order-row">
+          <div class="order-dot green"></div>
+          <div class="order-info">
+            <div class="order-name">Ana Ferreira</div>
+            <div class="order-time">Há 15 minutos · Viana</div>
+          </div>
+          <div class="order-price">24.990 Kz</div>
+        </div>
+        <div class="mini-order-row">
+          <div class="order-dot"></div>
+          <div class="order-info">
+            <div class="order-name">Pedro Cardoso</div>
+            <div class="order-time">Há 1 hora · Cacuaco</div>
+          </div>
+          <div class="order-price">5.200 Kz</div>
+        </div>
+      </div>
+      <div class="floating-badge bot">🚀 Loja criada em 3 minutos!</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOS DE NEGÓCIO -->
+<section id="negocios" style="padding: 96px 5%; background: var(--white);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">Para qualquer negócio</div>
+    <h2 class="section-title">Venda o que quiser,<br>como quiser</h2>
+    <p class="section-sub">Da loja de bairro ao grande armazém — a GiltraquinoStore adapta-se a qualquer modelo de negócio comercial.</p>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="filterBiz('todos')">Todos</button>
+      <button class="tab-btn" onclick="filterBiz('alimentar')">Alimentação</button>
+      <button class="tab-btn" onclick="filterBiz('moda')">Moda</button>
+      <button class="tab-btn" onclick="filterBiz('tecnologia')">Tecnologia</button>
+      <button class="tab-btn" onclick="filterBiz('servicos')">Serviços</button>
+      <button class="tab-btn" onclick="filterBiz('outros')">Outros</button>
+    </div>
+
+    <div class="biz-grid" id="bizGrid">
+      <!-- Alimentação -->
+      <div class="biz-card" data-cat="alimentar" onclick="openBizModal(this)">
+        <span class="biz-emoji">🍽️</span>
+        <div class="biz-name">Restaurante</div>
+        <div class="biz-desc">Pedidos online, menu digital e entregas</div>
+      </div>
+      <div class="biz-card" data-cat="alimentar" onclick="openBizModal(this)">
+        <span class="biz-emoji">🛒</span>
+        <div class="biz-name">Supermercado</div>
+        <div class="biz-desc">Gestão de stock e encomendas online</div>
+      </div>
+      <div class="biz-card" data-cat="alimentar" onclick="openBizModal(this)">
+        <span class="biz-emoji">☕</span>
+        <div class="biz-name">Cafetaria</div>
+        <div class="biz-desc">Pedidos antecipados e take-away</div>
+      </div>
+      <div class="biz-card" data-cat="alimentar" onclick="openBizModal(this)">
+        <span class="biz-emoji">🍰</span>
+        <div class="biz-name">Pastelaria</div>
+        <div class="biz-desc">Encomendas de bolos e entregas especiais</div>
+      </div>
+      <div class="biz-card" data-cat="alimentar" onclick="openBizModal(this)">
+        <span class="biz-emoji">🥩</span>
+        <div class="biz-name">Talho / Peixaria</div>
+        <div class="biz-desc">Catálogo e pré-encomendas online</div>
+      </div>
+      <!-- Moda -->
+      <div class="biz-card" data-cat="moda" onclick="openBizModal(this)">
+        <span class="biz-emoji">👗</span>
+        <div class="biz-name">Loja de Roupa</div>
+        <div class="biz-desc">Catálogo com tamanhos, cores e fotos</div>
+      </div>
+      <div class="biz-card" data-cat="moda" onclick="openBizModal(this)">
+        <span class="biz-emoji">👟</span>
+        <div class="biz-name">Calçado</div>
+        <div class="biz-desc">Gestão de numerações e stock</div>
+      </div>
+      <div class="biz-card" data-cat="moda" onclick="openBizModal(this)">
+        <span class="biz-emoji">💍</span>
+        <div class="biz-name">Joalharia</div>
+        <div class="biz-desc">Catálogo premium com vídeos e fotos HD</div>
+      </div>
+      <div class="biz-card" data-cat="moda" onclick="openBizModal(this)">
+        <span class="biz-emoji">👜</span>
+        <div class="biz-name">Malas &amp; Acessórios</div>
+        <div class="biz-desc">Vitrine online com variações de produto</div>
+      </div>
+      <!-- Tecnologia -->
+      <div class="biz-card" data-cat="tecnologia" onclick="openBizModal(this)">
+        <span class="biz-emoji">📱</span>
+        <div class="biz-name">Loja de Telemóveis</div>
+        <div class="biz-desc">Fichas técnicas, garantias e preços em Kz</div>
+      </div>
+      <div class="biz-card" data-cat="tecnologia" onclick="openBizModal(this)">
+        <span class="biz-emoji">💻</span>
+        <div class="biz-name">Informática</div>
+        <div class="biz-desc">Componentes, periféricos e acessórios</div>
+      </div>
+      <div class="biz-card" data-cat="tecnologia" onclick="openBizModal(this)">
+        <span class="biz-emoji">📸</span>
+        <div class="biz-name">Fotografia</div>
+        <div class="biz-desc">Equipamentos e agendamento de sessões</div>
+      </div>
+      <!-- Serviços -->
+      <div class="biz-card" data-cat="servicos" onclick="openBizModal(this)">
+        <span class="biz-emoji">💈</span>
+        <div class="biz-name">Barbearia / Salão</div>
+        <div class="biz-desc">Agendamento online e venda de produtos</div>
+      </div>
+      <div class="biz-card" data-cat="servicos" onclick="openBizModal(this)">
+        <span class="biz-emoji">🏋️</span>
+        <div class="biz-name">Academia / Ginásio</div>
+        <div class="biz-desc">Inscrições, planos e venda de suplementos</div>
+      </div>
+      <div class="biz-card" data-cat="servicos" onclick="openBizModal(this)">
+        <span class="biz-emoji">🚗</span>
+        <div class="biz-name">Oficina Automóvel</div>
+        <div class="biz-desc">Orçamentos, peças e agendamentos</div>
+      </div>
+      <div class="biz-card" data-cat="servicos" onclick="openBizModal(this)">
+        <span class="biz-emoji">🏠</span>
+        <div class="biz-name">Imobiliária</div>
+        <div class="biz-desc">Listagem de imóveis com fotos e contactos</div>
+      </div>
+      <!-- Outros -->
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">📚</span>
+        <div class="biz-name">Papelaria / Livros</div>
+        <div class="biz-desc">Catálogo de material escolar e livros</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🌿</span>
+        <div class="biz-name">Farmácia / Saúde</div>
+        <div class="biz-desc">Produtos, disponibilidade e preços</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🪑</span>
+        <div class="biz-name">Mobiliário</div>
+        <div class="biz-desc">Catálogo com medidas e personalização</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🔧</span>
+        <div class="biz-name">Material de Construção</div>
+        <div class="biz-desc">Armazéns, grossistas e retalhistas</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">⚡</span>
+        <div class="biz-name">Energia Solar</div>
+        <div class="biz-desc">Painéis, baterias, inversores e instalação</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🎁</span>
+        <div class="biz-name">Presentes &amp; Flores</div>
+        <div class="biz-desc">Entregas especiais e personalização</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🐾</span>
+        <div class="biz-name">Pet Shop</div>
+        <div class="biz-desc">Alimentos, acessórios e consultas</div>
+      </div>
+      <div class="biz-card" data-cat="outros" onclick="openBizModal(this)">
+        <span class="biz-emoji">🏗️</span>
+        <div class="biz-name">Outro Negócio</div>
+        <div class="biz-desc">Crie qualquer tipo de loja personalizada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona" style="padding: 96px 5%; background: var(--grey);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label">Simples e rápido</div>
+      <h2 class="section-title">Comece a vender em 4 passos</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-title">Escolha o seu negócio</div>
+        <div class="step-desc">Seleccione o tipo de negócio e dê um nome à sua loja. Restaurante, loja de roupa, serviços — tudo funciona.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-title">Adicione os seus produtos</div>
+        <div class="step-desc">Carregue fotos, defina preços em Kz, escreva descrições e organize por categorias.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-title">Personalize o visual</div>
+        <div class="step-desc">Escolha um tema, defina as suas cores e personalize a loja com o logótipo do seu negócio.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-title">Comece a receber</div>
+        <div class="step-desc">Partilhe o link da loja, receba pagamentos via Multicaixa, Conta Móvel ou transferência bancária.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONALIDADES -->
+<section id="funcionalidades" class="features-bg">
+  <div class="features-inner">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label">Tudo incluído</div>
+      <h2 class="section-title">Ferramentas para crescer</h2>
+      <p class="section-sub" style="margin: 0 auto;">Tudo o que precisa para gerir e expandir o seu negócio online, já incluído na plataforma.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon">💳</div>
+        <div class="feat-title">Pagamento em Kz</div>
+        <div class="feat-desc">Integração nativa com Multicaixa Express, Conta Móvel, Unitel Money e transferência bancária angolana.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📦</div>
+        <div class="feat-title">Gestão de Stock</div>
+        <div class="feat-desc">Controle o inventário em tempo real. Alertas automáticos quando o stock está a diminuir.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🚚</div>
+        <div class="feat-title">Entregas Integradas</div>
+        <div class="feat-desc">Configure zonas de entrega por bairro, cidade ou província. Defina taxas de entrega personalizadas.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">Relatórios Avançados</div>
+        <div class="feat-desc">Dashboards com vendas, produtos mais populares, clientes frequentes e tendências do seu negócio.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📱</div>
+        <div class="feat-title">App GiltraquinoStore</div>
+        <div class="feat-desc">Gira a sua loja pelo telemóvel. Receba notificações de novas encomendas em tempo real.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎨</div>
+        <div class="feat-title">Temas Personalizáveis</div>
+        <div class="feat-desc">Dezenas de temas profissionais adaptados para cada tipo de negócio. Sem necessidade de programação.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔗</div>
+        <div class="feat-title">Redes Sociais</div>
+        <div class="feat-desc">Venda directamente pelo WhatsApp, Facebook e Instagram. Integração automática com partilha de produtos.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🔐</div>
+        <div class="feat-title">Segurança Total</div>
+        <div class="feat-desc">Loja com HTTPS, backups automáticos diários e protecção contra fraudes nas transacções.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-title">Marketing Integrado</div>
+        <div class="feat-desc">Cupões de desconto, campanhas de e-mail, programas de fidelidade e promoções especiais.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos" style="padding: 96px 5%;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label">Planos e preços</div>
+      <h2 class="section-title">Comece grátis, cresça sem limites</h2>
+      <p class="section-sub" style="margin:0 auto;">Todos os planos incluem loja online, suporte em português e pagamentos em Kz.</p>
+    </div>
+    <div class="plans-grid">
+      <!-- Gratuito -->
+      <div class="plan-card">
+        <div class="plan-name">INÍCIO</div>
+        <div class="plan-price">Grátis</div>
+        <div class="plan-desc">Perfeito para começar e testar a plataforma com os seus primeiros clientes.</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-check">✓</span> Até 20 produtos</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Loja online completa</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Link personalizado</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Pagamentos Multicaixa</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Suporte por e-mail</div>
+        <div class="plan-feature" style="opacity:.4"><span>✗</span> Domínio próprio</div>
+        <div class="plan-feature" style="opacity:.4"><span>✗</span> Relatórios avançados</div>
+        <button class="plan-cta outline" onclick="openModal('register')">Começar Grátis</button>
+      </div>
+      <!-- Pro -->
+      <div class="plan-card featured">
+        <div class="plan-badge">POPULAR</div>
+        <div class="plan-name">PRO</div>
+        <div class="plan-price"><sup>Kz </sup>14.900<span>/mês</span></div>
+        <div class="plan-desc">Para negócios em crescimento que precisam de mais produtos e ferramentas avançadas.</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-check">✓</span> Produtos ilimitados</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Domínio personalizado</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Relatórios avançados</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> App de gestão</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Cupões e promoções</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Suporte prioritário 24/7</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Integração WhatsApp</div>
+        <button class="plan-cta solid" onclick="openModal('register')">Começar Agora</button>
+      </div>
+      <!-- Enterprise -->
+      <div class="plan-card">
+        <div class="plan-name">EMPRESA</div>
+        <div class="plan-price"><sup>Kz </sup>39.900<span>/mês</span></div>
+        <div class="plan-desc">Para grandes operações comerciais com múltiplas lojas e equipas de gestão.</div>
+        <hr class="plan-divider">
+        <div class="plan-feature"><span class="plan-check">✓</span> Tudo do plano Pro</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Múltiplas lojas</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> API de integração</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Gestor de conta dedicado</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Formação presencial</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> Personalização avançada</div>
+        <div class="plan-feature"><span class="plan-check">✓</span> SLA garantido</div>
+        <button class="plan-cta outline" onclick="openModal('register')">Falar com Vendas</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DASHBOARD PREVIEW ── -->
+<section id="dashboard" style="padding:96px 5%; background:var(--white); overflow:hidden;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+    <div>
+      <div class="section-label">Painel de Controlo</div>
+      <h2 class="section-title">Gira tudo num só lugar</h2>
+      <p style="color:var(--grey-dark); line-height:1.8; margin-bottom:32px; font-size:1rem;">O seu dashboard GiltraquinoStore dá-lhe uma visão completa do negócio em tempo real — vendas, encomendas, stock e clientes, tudo integrado e em kwanzas.</p>
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:40px;height:40px;background:var(--orange-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📈</div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Vendas em Tempo Real</div><div style="font-size:.87rem;color:var(--grey-dark);line-height:1.6;">Acompanhe cada venda no momento em que acontece, com notificações instantâneas no telemóvel.</div></div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:40px;height:40px;background:var(--orange-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📋</div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Gestão de Encomendas</div><div style="font-size:.87rem;color:var(--grey-dark);line-height:1.6;">Aceite, processe e confirme entregas diretamente pelo painel ou pela app móvel.</div></div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:40px;height:40px;background:var(--orange-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">👥</div>
+          <div><div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Base de Clientes</div><div style="font-size:.87rem;color:var(--grey-dark);line-height:1.6;">Histórico completo de cada cliente, com encomendas passadas e preferências de compra.</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Mock -->
+    <div style="position:relative;">
+      <div style="background:#1A1D23; border-radius:20px; padding:24px; box-shadow:0 24px 64px rgba(0,0,0,0.25); position:relative; overflow:hidden;">
+        <!-- Top bar -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+          <div style="font-family:'Syne',sans-serif; color:white; font-weight:700; font-size:.95rem;">Dashboard GiltraquinoStore</div>
+          <div style="display:flex; gap:6px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:#FF5F56;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#27C840;"></div>
+          </div>
+        </div>
+        <!-- KPI row -->
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px;">
+          <div style="background:#252830; border-radius:10px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:.7rem; color:#9CA3AF; margin-bottom:6px; text-transform:uppercase; letter-spacing:.08em;">Vendas Hoje</div>
+            <div style="font-family:'Syne',sans-serif; color:white; font-size:1.1rem; font-weight:800;">87.400 Kz</div>
+            <div style="font-size:.72rem; color:#22C55E; margin-top:4px;">▲ +12% vs ontem</div>
+          </div>
+          <div style="background:#252830; border-radius:10px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:.7rem; color:#9CA3AF; margin-bottom:6px; text-transform:uppercase; letter-spacing:.08em;">Encomendas</div>
+            <div style="font-family:'Syne',sans-serif; color:white; font-size:1.1rem; font-weight:800;">34</div>
+            <div style="font-size:.72rem; color:#22C55E; margin-top:4px;">▲ 8 por processar</div>
+          </div>
+          <div style="background:#252830; border-radius:10px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:.7rem; color:#9CA3AF; margin-bottom:6px; text-transform:uppercase; letter-spacing:.08em;">Clientes</div>
+            <div style="font-family:'Syne',sans-serif; color:white; font-size:1.1rem; font-weight:800;">1.247</div>
+            <div style="font-size:.72rem; color:var(--orange-light); margin-top:4px;">▲ +23 esta semana</div>
+          </div>
+        </div>
+        <!-- Mini chart -->
+        <div style="background:#252830; border-radius:10px; padding:16px; margin-bottom:14px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:.75rem; color:#9CA3AF; margin-bottom:12px;">Vendas dos últimos 7 dias (Kz)</div>
+          <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#F56A00" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#F56A00" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 65 L45 50 L90 55 L135 30 L180 38 L225 18 L270 24 L320 10 L320 80 L0 80 Z" fill="url(#chartGrad)"/>
+            <path d="M0 65 L45 50 L90 55 L135 30 L180 38 L225 18 L270 24 L320 10" fill="none" stroke="#F56A00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="320" cy="10" r="4" fill="#F56A00"/>
+          </svg>
+        </div>
+        <!-- Recent orders mini -->
+        <div style="background:#252830; border-radius:10px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:.75rem; color:#9CA3AF; margin-bottom:10px;">Últimas Encomendas</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:8px;align-items:center;"><div style="width:6px;height:6px;border-radius:50%;background:#22C55E;"></div><span style="color:white;font-size:.8rem;">Maria João</span></div>
+            <span style="color:var(--orange-light);font-size:.8rem;font-weight:600;">12.500 Kz</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:8px;align-items:center;"><div style="width:6px;height:6px;border-radius:50%;background:#FEBC2E;"></div><span style="color:white;font-size:.8rem;">Carlos Neto</span></div>
+            <span style="color:var(--orange-light);font-size:.8rem;font-weight:600;">7.800 Kz</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0;">
+            <div style="display:flex;gap:8px;align-items:center;"><div style="width:6px;height:6px;border-radius:50%;background:#22C55E;"></div><span style="color:white;font-size:.8rem;">Rosa Silva</span></div>
+            <span style="color:var(--orange-light);font-size:.8rem;font-weight:600;">31.200 Kz</span>
+          </div>
+        </div>
+      </div>
+      <!-- Floating pill -->
+      <div style="position:absolute;top:-18px;right:-18px;background:var(--orange);color:white;border-radius:30px;padding:10px 18px;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;box-shadow:0 8px 24px rgba(245,106,0,0.4);">📱 App disponível</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COUNTERS / PROVA SOCIAL ── -->
+<section style="background:linear-gradient(135deg,var(--orange-dark),var(--orange),var(--orange-light)); padding:56px 5%;">
+  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px; text-align:center;">
+    <div>
+      <div class="counter-num" data-target="12000" style="font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:white;">0</div>
+      <div style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:4px;">Lojas Activas</div>
+    </div>
+    <div>
+      <div class="counter-num" data-target="450000" style="font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:white;">0</div>
+      <div style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:4px;">Encomendas Processadas</div>
+    </div>
+    <div>
+      <div class="counter-num" data-target="18" style="font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:white;" data-suffix=" províncias">0</div>
+      <div style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:4px;">Províncias cobertas</div>
+    </div>
+    <div>
+      <div class="counter-num" data-target="98" style="font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:white;" data-suffix="%">0</div>
+      <div style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:4px;">Satisfação dos clientes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTEMUNHOS ── -->
+<section style="padding:96px 5%; background:var(--grey);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:60px;">
+      <div class="section-label">Histórias de sucesso</div>
+      <h2 class="section-title">O que dizem os nossos clientes</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;" class="testimonials-grid">
+      <div style="background:var(--white); border-radius:var(--radius); padding:32px; border:1px solid var(--grey-mid); position:relative;">
+        <div style="font-size:2rem; color:var(--orange); font-family:'Syne',sans-serif; line-height:1; margin-bottom:12px;">"</div>
+        <p style="font-size:.9rem; color:var(--grey-deep); line-height:1.75; margin-bottom:24px;">Antes vendia só pelas redes sociais e era muito complicado controlar os pagamentos. Com a GiltraquinoStore tenho tudo organizado e os clientes pagam directo pelo Multicaixa. As vendas duplicaram em 3 meses!</p>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange-light));display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👩🏾</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem;">Carla Domingos</div>
+            <div style="font-size:.78rem; color:var(--orange);">Loja Mwana Moda · Luanda</div>
+          </div>
+          <div style="margin-left:auto; font-size:.8rem; color:#FEBC2E;">★★★★★</div>
+        </div>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:32px; border:2px solid var(--orange); position:relative; box-shadow:var(--shadow-lg);">
+        <div style="font-size:2rem; color:var(--orange); font-family:'Syne',sans-serif; line-height:1; margin-bottom:12px;">"</div>
+        <p style="font-size:.9rem; color:var(--grey-deep); line-height:1.75; margin-bottom:24px;">Tenho um restaurante no Talatona e precisava de uma forma de receber pedidos online. Em menos de uma hora a loja estava pronta e já estava a receber encomendas. O suporte em português é excelente!</p>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1D4ED8,#3B82F6);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👨🏾</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem;">Manuel Lopes</div>
+            <div style="font-size:.78rem; color:var(--orange);">Sabores do Kwanza · Talatona</div>
+          </div>
+          <div style="margin-left:auto; font-size:.8rem; color:#FEBC2E;">★★★★★</div>
+        </div>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:32px; border:1px solid var(--grey-mid); position:relative;">
+        <div style="font-size:2rem; color:var(--orange); font-family:'Syne',sans-serif; line-height:1; margin-bottom:12px;">"</div>
+        <p style="font-size:.9rem; color:var(--grey-deep); line-height:1.75; margin-bottom:24px;">A minha barbearia estava a perder clientes por não ter reservas online. Agora os clientes agendam pelo site, compram produtos e até deixam avaliações. O plano Pro vale cada kwanza!</p>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👨🏿</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem;">António Mbemba</div>
+            <div style="font-size:.78rem; color:var(--orange);">Barbearia Elegance · Viana</div>
+          </div>
+          <div style="margin-left:auto; font-size:.8rem; color:#FEBC2E;">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <!-- Second row -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:24px;">
+      <div style="background:var(--white); border-radius:var(--radius); padding:28px; border:1px solid var(--grey-mid); display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#059669,#34D399);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">👩🏽</div>
+        <div>
+          <div style="font-size:.88rem; color:var(--grey-deep); line-height:1.7; margin-bottom:12px;">"Vendo energia solar e precisava de mostrar os painéis com preço em Kz. A plataforma permite fazer fichas técnicas detalhadas. Já fechei contratos de 2 milhões de Kz pela loja!"</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem;">Esperança Neto</div>
+          <div style="font-size:.75rem; color:var(--orange);">Solar Angola · Benguela</div>
+        </div>
+      </div>
+      <div style="background:var(--white); border-radius:var(--radius); padding:28px; border:1px solid var(--grey-mid); display:flex; gap:16px; align-items:flex-start;">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#DC2626,#F87171);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">👨🏾</div>
+        <div>
+          <div style="font-size:.88rem; color:var(--grey-deep); line-height:1.7; margin-bottom:12px;">"Tenho um armazém de material de construção no Cazenga. A GiltraquinoStore ajudou-me a organizar mais de 500 produtos com stock em tempo real. Os clientes adoram poder ver antes de vir buscar."</div>
+          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem;">Joaquim Teixeira</div>
+          <div style="font-size:.75rem; color:var(--orange);">ConstruBem · Cazenga</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTEGRAÇÕES ── -->
+<section style="padding:80px 5%; background:var(--white); border-top:1px solid var(--grey-mid);">
+  <div style="max-width:1100px; margin:0 auto; text-align:center;">
+    <div class="section-label">Pagamentos angolanos</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:12px;">Integrado com os métodos de pagamento locais</h2>
+    <p style="color:var(--grey-dark);margin-bottom:48px;font-size:.95rem;">Os seus clientes pagam com os métodos que já conhecem e confiam.</p>
+    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; align-items:center;">
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">🏧</span> Multicaixa Express
+      </div>
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">📱</span> Conta Móvel
+      </div>
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">📲</span> Unitel Money
+      </div>
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">🏦</span> Transferência BNA
+      </div>
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">💵</span> Pagamento na Entrega
+      </div>
+      <div style="background:var(--grey);border-radius:12px;padding:18px 28px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:.9rem;border:1px solid var(--grey-mid);">
+        <span style="font-size:1.4rem;">💳</span> Cartão Visa / MC
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section style="padding:96px 5%; background:var(--grey);">
+  <div style="max-width:780px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:56px;">
+      <div class="section-label">Perguntas frequentes</div>
+      <h2 class="section-title">Tem dúvidas? Temos respostas</h2>
+    </div>
+    <div id="faqList" style="display:flex;flex-direction:column;gap:12px;">
+      <!-- FAQs inserted by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG PREVIEW ── -->
+<section style="padding:96px 5%; background:var(--white);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <div class="section-label">Aprenda e cresça</div>
+        <h2 class="section-title" style="margin-bottom:0;">Dicas para o seu negócio</h2>
+      </div>
+      <a href="#" style="color:var(--orange); font-weight:600; font-size:.9rem; text-decoration:none;">Ver todos os artigos →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;" class="blog-grid">
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--grey-mid);transition:box-shadow .25s;" onmouseenter="this.style.boxShadow='0 12px 40px rgba(245,106,0,0.12)'" onmouseleave="this.style.boxShadow='none'">
+        <div style="background:linear-gradient(135deg,var(--orange-pale),#FFD9B3);padding:40px 28px;position:relative;overflow:hidden;">
+          <div style="font-size:3rem;">🚀</div>
+          <div style="position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;background:rgba(245,106,0,.1);border-radius:50%;"></div>
+        </div>
+        <div style="padding:24px;">
+          <span style="font-size:.75rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;">Marketing</span>
+          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin:10px 0 10px;">Como vender mais usando o WhatsApp Business com a sua loja GiltraquinoStore</h3>
+          <p style="font-size:.82rem;color:var(--grey-dark);line-height:1.6;margin-bottom:16px;">Aprenda a integrar o WhatsApp Business com a sua loja online e aumente as suas vendas em até 3×.</p>
+          <a href="#" style="font-size:.83rem;color:var(--orange);font-weight:600;text-decoration:none;">Ler artigo →</a>
+        </div>
+      </div>
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--grey-mid);transition:box-shadow .25s;" onmouseenter="this.style.boxShadow='0 12px 40px rgba(245,106,0,0.12)'" onmouseleave="this.style.boxShadow='none'">
+        <div style="background:linear-gradient(135deg,#EEF2FF,#C7D2FE);padding:40px 28px;position:relative;overflow:hidden;">
+          <div style="font-size:3rem;">💡</div>
+          <div style="position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;background:rgba(99,102,241,.1);border-radius:50%;"></div>
+        </div>
+        <div style="padding:24px;">
+          <span style="font-size:.75rem;font-weight:700;color:#6366F1;text-transform:uppercase;letter-spacing:.1em;">Dicas</span>
+          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin:10px 0 10px;">5 erros que os comerciantes angolanos cometem ao vender online (e como evitá-los)</h3>
+          <p style="font-size:.82rem;color:var(--grey-dark);line-height:1.6;margin-bottom:16px;">Da fotografia dos produtos ao preço em Kz — conheça os erros mais comuns e como a GiltraquinoStore os resolve.</p>
+          <a href="#" style="font-size:.83rem;color:var(--orange);font-weight:600;text-decoration:none;">Ler artigo →</a>
+        </div>
+      </div>
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--grey-mid);transition:box-shadow .25s;" onmouseenter="this.style.boxShadow='0 12px 40px rgba(245,106,0,0.12)'" onmouseleave="this.style.boxShadow='none'">
+        <div style="background:linear-gradient(135deg,#ECFDF5,#A7F3D0);padding:40px 28px;position:relative;overflow:hidden;">
+          <div style="font-size:3rem;">📦</div>
+          <div style="position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;background:rgba(16,185,129,.1);border-radius:50%;"></div>
+        </div>
+        <div style="padding:24px;">
+          <span style="font-size:.75rem;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.1em;">Gestão</span>
+          <h3 style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin:10px 0 10px;">Como gerir o stock da sua loja online em Angola sem perder vendas</h3>
+          <p style="font-size:.82rem;color:var(--grey-dark);line-height:1.6;margin-bottom:16px;">Guia prático para controlar inventário, definir alertas de reposição e nunca perder uma venda por falta de stock.</p>
+          <a href="#" style="font-size:.83rem;color:var(--orange);font-weight:600;text-decoration:none;">Ler artigo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2>Pronto para começar a vender online?</h2>
+    <p>Junte-se a mais de 12.000 negócios angolanos que já usam a GiltraquinoStore para vender online todos os dias.</p>
+    <button class="btn-white" onclick="openModal('register')">Criar a Minha Loja Agora →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Giltraquino<span>Store</span></h3>
+      <p>A plataforma de e-commerce mais completa de Angola. Venda qualquer produto ou serviço com preços em Kz.</p>
+      <div style="margin-top:20px; display:flex; gap:12px;">
+        <a href="#" style="color:var(--orange); text-decoration:none; font-size:1.3rem;">📘</a>
+        <a href="#" style="color:var(--orange); text-decoration:none; font-size:1.3rem;">📸</a>
+        <a href="#" style="color:var(--orange); text-decoration:none; font-size:1.3rem;">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Plataforma</h4>
+      <ul>
+        <li><a href="#">Loja Virtual</a></li>
+        <li><a href="#">Checkout</a></li>
+        <li><a href="#">Aplicações</a></li>
+        <li><a href="#">Temas</a></li>
+        <li><a href="#">App Móvel</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre Nós</a></li>
+        <li><a href="#">Planos &amp; Preços</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Parceiros</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Suporte</h4>
+      <ul>
+        <li><a href="#">Central de Ajuda</a></li>
+        <li><a href="#">Tutoriais</a></li>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Comunidade</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 GiltraquinoStore. Todos os direitos reservados. 🇦🇴 Luanda, Angola</span>
+    <span><a href="#">Privacidade</a> · <a href="#">Termos</a></span>
+  </div>
+</footer>
+
+<!-- MODAL: REGISTER / LOGIN / BIZ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Criar Conta Grátis</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hero visual animation
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelector('.hero-visual').style.animation = 'floatUp .8s ease forwards';
+    }, 300);
+  });
+
+  // Scroll helper
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Business filter
+  const allCards = () => document.querySelectorAll('.biz-card');
+  function filterBiz(cat) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    allCards().forEach(c => {
+      c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // Modal
+  function openModal(type) {
+    const overlay = document.getElementById('modalOverlay');
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+
+    if (type === 'login') {
+      title.textContent = 'Entrar na sua conta';
+      body.innerHTML = `
+        <div class="form-group">
+          <label class="form-label">E-mail ou Telemóvel</label>
+          <input class="form-input" type="text" placeholder="exemplo@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Palavra-passe</label>
+          <input class="form-input" type="password" placeholder="••••••••">
+        </div>
+        <div style="text-align:right; margin-bottom:20px;">
+          <a href="#" style="font-size:.83rem; color:var(--orange); text-decoration:none;">Esqueci a palavra-passe</a>
+        </div>
+        <button class="btn-primary" style="width:100%; justify-content:center; padding:14px;" onclick="showSuccess('Bem-vindo de volta!')">Entrar</button>
+        <p style="text-align:center; margin-top:16px; font-size:.85rem; color:var(--grey-dark);">Não tem conta? <a href="#" style="color:var(--orange); text-decoration:none;" onclick="openModal('register')">Criar grátis</a></p>
+      `;
+    } else if (type === 'register') {
+      title.textContent = 'Criar Loja Grátis';
+      body.innerHTML = `
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome</label>
+            <input class="form-input" type="text" placeholder="O seu nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apelido</label>
+            <input class="form-input" type="text" placeholder="Apelido">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nome da Loja</label>
+          <input class="form-input" type="text" placeholder="Ex: Loja do João">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo de Negócio</label>
+          <select class="form-select">
+            <option value="">Seleccionar...</option>
+            <option>Restaurante / Alimentação</option>
+            <option>Loja de Roupa / Moda</option>
+            <option>Supermercado / Mercearia</option>
+            <option>Telemóveis / Tecnologia</option>
+            <option>Barbearia / Salão de Beleza</option>
+            <option>Calçado</option>
+            <option>Joalharia / Acessórios</option>
+            <option>Farmácia / Saúde</option>
+            <option>Material de Construção</option>
+            <option>Mobiliário</option>
+            <option>Pet Shop</option>
+            <option>Pastelaria / Padaria</option>
+            <option>Academia / Ginásio</option>
+            <option>Imobiliária</option>
+            <option>Energia Solar</option>
+            <option>Outro Negócio</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telemóvel</label>
+          <input class="form-input" type="tel" placeholder="+244 9XX XXX XXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input class="form-input" type="email" placeholder="exemplo@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Palavra-passe</label>
+          <input class="form-input" type="password" placeholder="Mínimo 8 caracteres">
+        </div>
+        <button class="btn-primary" style="width:100%; justify-content:center; padding:14px; margin-top:4px;" onclick="showSuccess('Loja criada com sucesso! 🎉')">Criar a Minha Loja Grátis →</button>
+        <p style="text-align:center; margin-top:14px; font-size:.8rem; color:var(--grey-dark);">Ao criar a conta aceita os <a href="#" style="color:var(--orange);">Termos de Uso</a> e a <a href="#" style="color:var(--orange);">Política de Privacidade</a></p>
+      `;
+    }
+
+    overlay.classList.add('open');
+  }
+
+  function openBizModal(card) {
+    const name = card.querySelector('.biz-name').textContent;
+    const emoji = card.querySelector('.biz-emoji').textContent;
+    const desc = card.querySelector('.biz-desc').textContent;
+    const title = document.getElementById('modalTitle');
+    const body = document.getElementById('modalBody');
+    title.textContent = `${emoji} ${name}`;
+    body.innerHTML = `
+      <p style="color:var(--grey-dark); margin-bottom:24px; line-height:1.7;">${desc}. A GiltraquinoStore tem todas as ferramentas específicas para o seu tipo de negócio — desde o catálogo de produtos até ao processamento de pagamentos em Kz.</p>
+      <div style="background:var(--grey); border-radius:12px; padding:20px; margin-bottom:24px;">
+        <div style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:12px; font-size:.9rem;">Funcionalidades incluídas para ${name}:</div>
+        <div style="font-size:.85rem; color:var(--grey-dark); line-height:2;">
+          ✅ Catálogo de produtos personalizado<br>
+          ✅ Pagamentos em Kz (Multicaixa, Conta Móvel)<br>
+          ✅ Gestão de encomendas e entregas<br>
+          ✅ Relatórios de vendas<br>
+          ✅ Partilha por WhatsApp e redes sociais
+        </div>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center; padding:14px;" onclick="openModal('register')">Criar Loja de ${name} Grátis →</button>
+    `;
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  function closeOnOverlay(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function showSuccess(msg) {
+    const body = document.getElementById('modalBody');
+    body.innerHTML = `
+      <div style="text-align:center; padding:32px 0;">
+        <div style="font-size:3.5rem; margin-bottom:20px;">🎉</div>
+        <h3 style="font-family:'Syne',sans-serif; font-size:1.4rem; margin-bottom:12px;">${msg}</h3>
+        <p style="color:var(--grey-dark); margin-bottom:28px; line-height:1.7;">A sua loja GiltraquinoStore está a ser preparada. Vai receber um e-mail de confirmação em breve.</p>
+        <button class="btn-primary" style="margin:0 auto; justify-content:center; padding:13px 28px;" onclick="closeModal()">Ir para a minha loja →</button>
+      </div>
+    `;
+  }
+
+  // Escape key close
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── FAQ ──
+  const faqs = [
+    { q: 'A GiltraquinoStore é mesmo gratuita?', a: 'Sim! O plano Início é 100% gratuito e inclui até 20 produtos, loja online completa e pagamentos Multicaixa. Só paga quando quiser mais funcionalidades no plano Pro ou Empresa.' },
+    { q: 'Posso vender qualquer tipo de produto ou serviço?', a: 'Absolutamente. A plataforma foi desenhada para qualquer negócio comercial angolano — desde restaurantes e lojas de roupa até oficinas, farmácias, academias, imobiliárias e muito mais.' },
+    { q: 'Como funcionam os pagamentos em Kz?', a: 'Os seus clientes podem pagar via Multicaixa Express, Conta Móvel, Unitel Money, transferência bancária ou pagamento na entrega. O dinheiro é transferido diretamente para a sua conta bancária angolana.' },
+    { q: 'Preciso de saber programar para criar a minha loja?', a: 'Não. A GiltraquinoStore foi criada para qualquer pessoa, mesmo sem conhecimentos técnicos. Basta escolher um tema, adicionar os seus produtos e partilhar o link. Em menos de 1 hora a loja está pronta.' },
+    { q: 'A minha loja aparece no Google?', a: 'Sim! Todas as lojas GiltraquinoStore são optimizadas para motores de busca (SEO). Os seus produtos podem aparecer no Google quando alguém pesquisa por eles em Angola.' },
+    { q: 'Posso usar o meu próprio domínio (.ao)?', a: 'Sim, a partir do plano Pro pode ligar qualquer domínio personalizado à sua loja, incluindo domínios .ao, .com, .co.ao ou outros.' },
+    { q: 'O suporte está disponível em português?', a: 'Sim, todo o suporte da GiltraquinoStore é em português europeu e angolano. Estamos disponíveis por WhatsApp, e-mail e chat em directo de segunda a sábado.' },
+    { q: 'Posso migrar a minha loja de outra plataforma?', a: 'Sim! A nossa equipa ajuda-o gratuitamente a migrar produtos, clientes e histórico de encomendas de qualquer outra plataforma para a GiltraquinoStore.' },
+  ];
+
+  const faqList = document.getElementById('faqList');
+  faqs.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.style.cssText = 'background:var(--white);border-radius:12px;border:1px solid var(--grey-mid);overflow:hidden;';
+    el.innerHTML = `
+      <button onclick="toggleFaq(${i},this)" style="width:100%;text-align:left;padding:20px 24px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:inherit;">
+        <span style="font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--black);">${item.q}</span>
+        <span class="faq-arrow" style="color:var(--orange);font-size:1.3rem;flex-shrink:0;transition:transform .3s;font-weight:300;">+</span>
+      </button>
+      <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+        <div style="padding:0 24px 20px;font-size:.88rem;color:var(--grey-dark);line-height:1.75;">${item.a}</div>
+      </div>`;
+    faqList.appendChild(el);
+  });
+
+  function toggleFaq(idx, btn) {
+    const body = btn.closest('div').querySelector('.faq-body');
+    const arrow = btn.querySelector('.faq-arrow');
+    const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+    document.querySelectorAll('.faq-body').forEach(b => b.style.maxHeight = '0');
+    document.querySelectorAll('.faq-arrow').forEach(a => { a.textContent = '+'; a.style.transform = ''; });
+    if (!isOpen) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+      arrow.textContent = '−';
+    }
+  }
+
+  // ── COUNTERS ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const steps = duration / 16;
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + target / steps, target);
+      el.textContent = (current >= 1000 ? Math.round(current).toLocaleString('pt-AO') : Math.round(current)) + suffix;
+      if (current >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.animated) {
+        e.target.dataset.animated = '1';
+        animateCounter(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter-num').forEach(el => counterObs.observe(el));
+
+  // ── SCROLL ANIMATIONS ──
+  const scrollObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.feat-card, .plan-card, .biz-card, .step-item').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    scrollObs.observe(el);
+  });
+
+  // ── LIVE CHAT ──
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="chatBtn" onclick="toggleChat()" style="position:fixed;bottom:28px;right:28px;z-index:9000;width:58px;height:58px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 24px rgba(245,106,0,.45);font-size:1.5rem;transition:transform .2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform=''">💬</div>
+    <div id="chatPanel" style="position:fixed;bottom:100px;right:28px;z-index:9000;width:310px;background:white;border-radius:18px;box-shadow:0 16px 48px rgba(0,0,0,0.18);overflow:hidden;display:none;">
+      <div style="background:linear-gradient(135deg,var(--orange-dark),var(--orange));padding:18px 20px;color:white;">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:3px;">Suporte GiltraquinoStore</div>
+        <div style="font-size:.78rem;opacity:.85;">🟢 Online agora · Resposta em minutos</div>
+      </div>
+      <div id="chatMessages" style="padding:16px 16px 0;">
+        <div style="background:var(--grey);border-radius:12px 12px 12px 4px;padding:12px;font-size:.85rem;color:var(--grey-deep);line-height:1.6;margin-bottom:12px;">Olá! 👋 Bem-vindo à GiltraquinoStore. Como posso ajudá-lo hoje?</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;">
+          <button onclick="chatQuick('Criar loja','Óptimo! Clique em Criar Loja Grátis no topo da página. Em 5 minutos a sua loja está online! 🚀')" style="padding:6px 12px;border-radius:20px;border:1.5px solid var(--orange);background:transparent;color:var(--orange);font-size:.76rem;cursor:pointer;font-family:inherit;font-weight:600;">Criar loja</button>
+          <button onclick="chatQuick('Planos e preços','Temos Início (grátis), Pro (14.900 Kz/mês) e Empresa (39.900 Kz/mês). Todos incluem pagamentos em Kz! 💳')" style="padding:6px 12px;border-radius:20px;border:1.5px solid var(--orange);background:transparent;color:var(--orange);font-size:.76rem;cursor:pointer;font-family:inherit;font-weight:600;">Planos e preços</button>
+          <button onclick="chatQuick('Pagamentos Kz','Aceitamos Multicaixa Express, Conta Móvel, Unitel Money, transferência bancária e pagamento na entrega! 🇦🇴')" style="padding:6px 12px;border-radius:20px;border:1.5px solid var(--orange);background:transparent;color:var(--orange);font-size:.76rem;cursor:pointer;font-family:inherit;font-weight:600;">Pagamentos Kz</button>
+        </div>
+      </div>
+      <div style="padding:12px 16px 16px;display:flex;gap:8px;">
+        <input id="chatInput" type="text" placeholder="Escreva uma mensagem..." onkeydown="if(event.key==='Enter')sendChat()" style="flex:1;padding:10px 12px;border:1.5px solid var(--grey-mid);border-radius:8px;font-family:inherit;font-size:.83rem;outline:none;">
+        <button onclick="sendChat()" style="padding:10px 14px;background:var(--orange);border:none;border-radius:8px;color:white;cursor:pointer;font-size:1rem;">→</button>
+      </div>
+    </div>`);
+
+  function toggleChat() {
+    const p = document.getElementById('chatPanel');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  }
+  function chatQuick(q, a) {
+    const msgs = document.getElementById('chatMessages');
+    msgs.insertAdjacentHTML('beforeend', `<div style="background:var(--orange);color:white;border-radius:12px 12px 4px 12px;padding:10px 12px;font-size:.83rem;margin-bottom:10px;text-align:right;">${q}</div>`);
+    setTimeout(() => {
+      msgs.insertAdjacentHTML('beforeend', `<div style="background:var(--grey);border-radius:12px 12px 12px 4px;padding:10px 12px;font-size:.83rem;color:var(--grey-deep);line-height:1.6;margin-bottom:10px;">${a}</div>`);
+    }, 600);
+  }
+  function sendChat() {
+    const inp = document.getElementById('chatInput');
+    if (!inp.value.trim()) return;
+    chatQuick(inp.value, 'Obrigado! Um agente responderá em breve. WhatsApp: +244 9XX XXX XXX 😊');
+    inp.value = '';
+  }
+
+  // ── NEWSLETTER POPUP ──
+  setTimeout(() => {
+    if (sessionStorage.getItem('newsShown')) return;
+    sessionStorage.setItem('newsShown','1');
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="newsPopup" style="position:fixed;bottom:28px;left:28px;z-index:8000;background:white;border-radius:16px;padding:24px;width:290px;box-shadow:0 16px 48px rgba(0,0,0,0.16);border:1px solid var(--grey-mid);">
+        <button onclick="document.getElementById('newsPopup').remove()" style="position:absolute;top:10px;right:10px;background:var(--grey);border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.85rem;">✕</button>
+        <div style="font-size:1.8rem;margin-bottom:8px;">🎁</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;margin-bottom:7px;">30 dias Pro grátis!</div>
+        <p style="font-size:.8rem;color:var(--grey-dark);line-height:1.6;margin-bottom:14px;">Subscreva a nossa newsletter e ganhe 30 dias do plano Pro sem custo.</p>
+        <input type="email" placeholder="O seu e-mail" style="width:100%;padding:9px 12px;border:1.5px solid var(--grey-mid);border-radius:8px;font-family:inherit;font-size:.83rem;outline:none;margin-bottom:9px;">
+        <button onclick="document.getElementById('newsPopup').remove()" style="width:100%;padding:10px;background:var(--orange);color:white;border:none;border-radius:8px;font-family:inherit;font-weight:700;cursor:pointer;font-size:.84rem;">Quero os 30 dias grátis →</button>
+      </div>`);
+  }, 9000);
+
+  // ── RESPONSIVE ──
+  function doResponsive() {
+    const w = window.innerWidth;
+    document.querySelectorAll('.testimonials-grid, .blog-grid').forEach(g => {
+      g.style.gridTemplateColumns = w < 768 ? '1fr' : '';
+    });
+  }
+  doResponsive();
+  window.addEventListener('resize', doResponsive);
+</script>
+</body>
+</html>

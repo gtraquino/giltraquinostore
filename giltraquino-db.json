@@ -1,0 +1,165 @@
+{
+  "users": [
+    {
+      "id": "af18cf99-9029-4732-a0e1-e2455bf13a9a",
+      "name": "Administrador",
+      "email": "admin@giltraquinostore.ao",
+      "password": "$2b$10$lcgG1Pc6DBV3yK8aP9lxMuDL4.tjfcJJnIS0Bkfhc0d79QzCELoXu",
+      "role": "admin",
+      "phone": "+244 923 000 000",
+      "createdAt": "2026-05-24T11:09:04.329Z",
+      "active": true
+    }
+  ],
+  "products": [
+    {
+      "id": "fbd13053-7044-4c4c-aa42-7e40072bf45f",
+      "name": "Camisa Social Premium",
+      "description": "Algodão de alta qualidade, várias cores",
+      "price": 8500,
+      "stock": 50,
+      "category": "dbf88769-d5d4-45bb-8659-a29067ff049e",
+      "image": null,
+      "active": true,
+      "sales": 0,
+      "createdAt": "2026-05-24T11:09:04.333Z",
+      "updatedAt": "2026-05-24T11:09:04.333Z"
+    },
+    {
+      "id": "81834ac8-61f3-4bc6-885d-a4120db7d367",
+      "name": "Calças Jeans Slim",
+      "description": "Ganga slim fit, confortável",
+      "price": 12990,
+      "stock": 30,
+      "category": "dbf88769-d5d4-45bb-8659-a29067ff049e",
+      "image": null,
+      "active": true,
+      "sales": 0,
+      "createdAt": "2026-05-24T11:09:04.333Z",
+      "updatedAt": "2026-05-24T11:09:04.333Z"
+    },
+    {
+      "id": "3c9a4440-9bcc-4a74-ae91-c614f7509f15",
+      "name": "Sapatilhas Desportivas",
+      "description": "Ideais para treino e dia-a-dia",
+      "price": 19500,
+      "stock": 20,
+      "category": "dbf88769-d5d4-45bb-8659-a29067ff049e",
+      "image": null,
+      "active": true,
+      "sales": 0,
+      "createdAt": "2026-05-24T11:09:04.333Z",
+      "updatedAt": "2026-05-24T11:09:04.333Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "14ecac2f-eaa3-406c-ac77-febfba9ddd99",
+      "name": "Alimentação",
+      "emoji": "🍽️",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.331Z"
+    },
+    {
+      "id": "dbf88769-d5d4-45bb-8659-a29067ff049e",
+      "name": "Moda & Vestuário",
+      "emoji": "👗",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.331Z"
+    },
+    {
+      "id": "ac522e3a-42b4-48d8-aba4-846e1667a08b",
+      "name": "Tecnologia",
+      "emoji": "📱",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.331Z"
+    },
+    {
+      "id": "3f36a579-846f-4105-970f-e1cf66ca7f4d",
+      "name": "Serviços",
+      "emoji": "🔧",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.331Z"
+    },
+    {
+      "id": "995b7d5c-6e04-4e34-b0ec-c346b922cacd",
+      "name": "Saúde & Beleza",
+      "emoji": "💄",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.332Z"
+    },
+    {
+      "id": "7bab1fd1-6d09-4d54-9c2e-e07bd92908c5",
+      "name": "Casa & Decoração",
+      "emoji": "🪑",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.332Z"
+    },
+    {
+      "id": "5919e699-970c-4204-affa-433ef2c431b7",
+      "name": "Desporto",
+      "emoji": "⚽",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.332Z"
+    },
+    {
+      "id": "e8d42c48-a68e-46be-8e94-2949ca8038a9",
+      "name": "Materiais",
+      "emoji": "🏗️",
+      "active": true,
+      "createdAt": "2026-05-24T11:09:04.332Z"
+    }
+  ],
+  "orders": [],
+  "clients": [],
+  "payments": [],
+  "deliveryZones": [
+    {
+      "id": "32d6411a-67b8-4312-86b4-6c56fed1cd7c",
+      "name": "Luanda Centro",
+      "fee": 500,
+      "active": true
+    },
+    {
+      "id": "b6c0b535-b8a0-4af9-827a-2e83e9a73024",
+      "name": "Talatona / Luanda Sul",
+      "fee": 800,
+      "active": true
+    },
+    {
+      "id": "e09ed2c5-afa8-45dd-a22a-3839b4866b50",
+      "name": "Viana / Cacuaco",
+      "fee": 1200,
+      "active": true
+    },
+    {
+      "id": "d55c6f42-fb46-46fc-900d-18370dffd8bc",
+      "name": "Benguela",
+      "fee": 3500,
+      "active": true
+    },
+    {
+      "id": "a5fc8ff6-6d45-4a29-b0a3-0d0d6eef88d3",
+      "name": "Outras Províncias",
+      "fee": 5000,
+      "active": true
+    }
+  ],
+  "settings": {
+    "storeName": "GiltraquinoStore",
+    "currency": "Kz",
+    "storeEmail": "geral@giltraquinostore.ao",
+    "storePhone": "+244 923 000 000",
+    "storeAddress": "Luanda, Angola",
+    "whatsapp": "+244923000000",
+    "instagram": "@giltraquinostore",
+    "facebook": "GiltraquinoStore",
+    "acceptMulticaixa": true,
+    "acceptContaMovel": true,
+    "acceptUnitelMoney": true,
+    "acceptTransferencia": true,
+    "acceptEntrega": true,
+    "minOrderValue": 0,
+    "freeDeliveryAbove": 50000
+  }
+}
